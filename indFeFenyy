@@ -11,7 +11,8 @@
 <body>
 
 <header>
-  <img src="Fenix/Fenix.png" alt="Logo Fénix" style="max-height: 80px;">
+
+  <img src="Fenix/Fenix.png" alt="Logo de Fénix" class="logo" />
   <h1>Fénix</h1>
   <nav>
     <ul>

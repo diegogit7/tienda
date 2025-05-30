@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda de Ropa</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header>
+    <h1>Tienda de Ropa</h1>
+  </header>
+
+  <main>
+    <div class="producto">
+      <h2>Polera Negra</h2>
+      <p>$9.990</p>
+      <button onclick="agregarAlCarrito('Polera Negra', 9990)">Agregar al carrito</button>
+    </div>
+
+    <div class="producto">
+      <h2>Jeans Clásicos</h2>
+      <p>$14.990</p>
+      <button onclick="agregarAlCarrito('Jeans Clásicos', 14990)">Agregar al carrito</button>
+    </div>
+
+    <div class="carrito">
+      <h3>Carrito</h3>
+      <ul id="lista-carrito"></ul>
+      <p id="total">Total: $0</p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

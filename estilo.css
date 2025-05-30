@@ -1,0 +1,94 @@
+/* Reset y estilos básicos */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #e63946;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+h2 {
+  color: #e63946;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+section article {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+section article h3 {
+  margin-top: 0;
+}
+
+footer {
+  background-color: #222;
+  color: #ddd;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+  font-size: 0.9em;
+}
+
+
+header {
+  text-align: center;
+}
+
+header img {
+  display: block;
+  margin: 0 auto 10px auto;
+  max-height: 80px;
+}
+
+/* Asegura que el body y html ocupen el 100% de la altura */
+html, body {
+  height: 100%;
+}
+
+/* Estructura de layout tipo "sticky footer" */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenido principal crece para ocupar el espacio */
+main {
+  flex: 1;
+}
