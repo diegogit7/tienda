@@ -1,94 +1,183 @@
-/* Reset y estilos básicos */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  color: #333;
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px;
 }
+
 
 header {
-  background-color: #e63946;
-  color: white;
-  padding: 20px;
-  text-align: center;
+  background: #fff;
+  border-bottom: 1px solid #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 2px 0 2px 10px; 
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0 0;
+
+.header-content {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 0 0; 
+  min-height: unset;
+}
+
+
+.logo {
+  max-height: 56px; 
+  vertical-align: middle;
+}
+
+
+#carritoIcono {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  background: transparent;
+  box-shadow: none;
+  margin-right: 20px; 
   justify-content: center;
-  gap: 20px;
 }
 
-nav ul li a {
+#contador {
+  background: red;
   color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-nav ul li a:hover {
-  text-decoration: underline;
-}
-
-main {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 0 15px;
-}
-
-h2 {
-  color: #e63946;
+  border-radius: 50%;
+  padding: 2px 8px;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1em;
+  display: none;
+  min-width: 22px;
   text-align: center;
-  margin-bottom: 20px;
+  font-weight: bold;
+  pointer-events: none;
 }
 
-section article {
-  background-color: white;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.productos {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 30px auto 0 auto;
+  max-width: 900px;
+  width: 100%;
 }
 
-section article h3 {
-  margin-top: 0;
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.card {
+  max-width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.card img {
+  width: 100%;
+  max-width: 100px;
+  min-height: 260px;
+  max-height: 340px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 12px auto;
+  background: #fff;
+}
+
+.card h3 {
+  font-size: 1.6em;
+  font-weight: normal;
+  margin: 8px 0 6px 0;
+}
+
+.card p {
+  margin: 4px 0 0 0;
+  font-size: 1.25em;
+}
+
+#carrito {
+  position: fixed;
+  top: 60px;
+  right: 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  padding: 20px;
+  z-index: 1000;
+  min-width: 250px;
+}
+
+
+
+
+#carrito.oculto {
+  display: none;
+}
+
+#carrito button {
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 footer {
-  background-color: #222;
-  color: #ddd;
+  background: #fff;
+  color: #222;
   text-align: center;
-  padding: 15px;
-  margin-top: 40px;
-  font-size: 0.9em;
+  padding: 15px 0;
+  margin-top: auto;
+  width: 100%;
+  border-top: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+  letter-spacing: 1px;
 }
 
-
-header {
-  text-align: center;
+/* Responsive para móvil */
+@media (max-width: 600px) {
+  .productos {
+    max-width: 98vw;
+    margin: 10px 1vw 0 1vw;
+    gap: 12px;
+  }
+  .card img {
+    max-width: 95vw;
+    min-height: 100px;
+    max-height: 150px;
+  }
+  .card h3 {
+    font-size: 1.1em;
+  }
+  .card p {
+    font-size: 1em;
+  }
 }
 
-header img {
-  display: block;
-  margin: 0 auto 10px auto;
-  max-height: 80px;
-}
-
-/* Asegura que el body y html ocupen el 100% de la altura */
-html, body {
-  height: 100%;
-}
-
-/* Estructura de layout tipo "sticky footer" */
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* El contenido principal crece para ocupar el espacio */
-main {
-  flex: 1;
-}
