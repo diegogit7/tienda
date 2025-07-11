@@ -6,7 +6,7 @@ const productos = [
   { id: 5, nombre: "Zapatilla naranja", precio: 15000, imagen: "zapatillas/naranja.jpg" },
   { id: 6, nombre: "Zapatilla animal print fluor", precio: 12000, imagen: "zapatillas/Animalprintfluor.jpg" },
   { id: 7, nombre: "Zapatilla dorada", precio: 18000, imagen: "zapatillas/Dorada.jpg" },
-  { id: 8, nombre: "Zapatilla animal print zebra", precio: 22000, imagen: "zapatillas/Animalprintzebra.jpg" },
+  { id: 8, nombre: "Zapatill animal print zebra", precio: 22000, imagen: "zapatillas/Animalprintzebra.jpg" },
 ];
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
