@@ -24,11 +24,13 @@ function renderProductos() {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
-      <img src="${p.imagen}" alt="${p.nombre}" style="cursor:pointer;" />
+      <img src="${p.imagen}" alt="${p.nombre}" />
       <h3>${p.nombre}</h3>
       <p>$${p.precio}</p>
     `;
-     card.addEventListener("click", () => agregarAlCarrito(p.id));
+    card.addEventListener("click", () => {
+      window.location.href = `detalle.html?id=${p.id}`;
+    });
     productosContainer.appendChild(card);
   });
 }
