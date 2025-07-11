@@ -74,15 +74,45 @@ function actualizarContadorCarrito() {
   }
 }
 
+function renderCarrito() {
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const lista = document.getElementById("listaCarrito");
+  const total = document.getElementById("total");
+  lista.innerHTML = "";
+  let suma = 0;
+  carrito.forEach(item => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${item.nombre} (Talla ${item.talla}) x${item.cantidad} - $${item.precio * item.cantidad}
+      <button class="eliminar-item" data-id="${item.id}" data-talla="${item.talla}" style="margin-left:8px;">Eliminar</button>
+    `;
+    lista.appendChild(li);
+    suma += item.precio * item.cantidad;
+  });
+  total.textContent = suma;
 
+  // Evento para eliminar productos
+  document.querySelectorAll(".eliminar-item").forEach(btn => {
+    btn.onclick = function() {
+      const id = Number(btn.getAttribute("data-id"));
+      const talla = btn.getAttribute("data-talla");
+      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      carrito = carrito.filter(i => !(i.id === id && i.talla === talla));
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      actualizarContadorCarrito();
+      renderCarrito();
+    };
+  });
+}
 
 
 document.addEventListener("DOMContentLoaded", () => {
   mostrarDetalle();
   actualizarContadorCarrito();
 
-  document.getElementById("carritoIcono").addEventListener("click", () => {
+    document.getElementById("carritoIcono").addEventListener("click", () => {
     document.getElementById("carrito").classList.remove("oculto");
+    renderCarrito(); // <-- agrega esta línea
   });
   document.getElementById("cerrarCarrito").addEventListener("click", () => {
     document.getElementById("carrito").classList.add("oculto");
