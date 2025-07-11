@@ -105,7 +105,7 @@ header {
   height: auto;
   object-fit: contain;
   display: block;
-  margin: 0 auto 12px auto;
+  margin: 0 auto -25px auto;
   background: #fff;
 }
 
@@ -173,6 +173,7 @@ footer {
     max-width: 95vw;
     min-height: 100px;
     max-height: 150px;
+    margin: 0 auto 15px auto;
   }
   .card h3 {
     font-size: 1.1em;
