@@ -110,9 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
   mostrarDetalle();
   actualizarContadorCarrito();
 
-    document.getElementById("carritoIcono").addEventListener("click", () => {
-    document.getElementById("carrito").classList.remove("oculto");
-    renderCarrito(); // <-- agrega esta línea
+  document.getElementById("carritoIcono").addEventListener("click", () => {
+    window.location.href = "carrito.html"; // Redirige a la página de carrito
   });
   document.getElementById("cerrarCarrito").addEventListener("click", () => {
     document.getElementById("carrito").classList.add("oculto");
@@ -124,4 +123,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("total").textContent = "0";
     document.getElementById("carrito").classList.add("oculto");
   });
-});
+}); 

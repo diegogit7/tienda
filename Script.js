@@ -96,11 +96,9 @@ function mostrarMensaje(texto) {
 }
 
 document.getElementById("carritoIcono").addEventListener("click", () => {
-  carritoUI.classList.remove("oculto");
+  window.location.href = "carrito.html";
 });
-document.getElementById("cerrarCarrito").addEventListener("click", () => {
-  carritoUI.classList.add("oculto");
-});
+
 document.getElementById("vaciarCarrito").addEventListener("click", vaciarCarrito);
 
 // Inicializa
