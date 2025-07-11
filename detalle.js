@@ -19,7 +19,7 @@ function mostrarDetalle() {
   const producto = productos.find(p => p.id === id);
   const detalle = document.getElementById("detalleProducto");
   if (!producto) {
-    detalle.innerHTML = ""; // No muestra nada si no hay producto
+    detalle.innerHTML = "";
     return;
   }
   detalle.innerHTML = `
@@ -27,9 +27,37 @@ function mostrarDetalle() {
       <img src="${producto.imagen}" alt="${producto.nombre}" />
       <h3>${producto.nombre}</h3>
       <p>$${producto.precio}</p>
+      <div style="display: flex; align-items: center; gap: 16px; margin: 18px 0 8px 0;">
+        <div>
+          <label for="talla" style="font-weight:bold;">Talla:</label>
+          <select id="talla" style="margin-left:8px; padding:4px;">
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+          </select>
+        </div>
+        <button id="agregarDetalle" style="padding:6px 16px;">Agregar al carrito</button>
+      </div>
     </div>
   `;
+
+  document.getElementById("agregarDetalle").onclick = function() {
+    const talla = document.getElementById("talla").value;
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let item = carrito.find(i => i.id === producto.id && i.talla === talla);
+    if (item) {
+      item.cantidad += 1;
+    } else {
+      carrito.push({ ...producto, cantidad: 1, talla });
+    }
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    actualizarContadorCarrito();
+  };
 }
+
+
 
 function actualizarContadorCarrito() {
   const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -46,7 +74,24 @@ function actualizarContadorCarrito() {
   }
 }
 
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   mostrarDetalle();
   actualizarContadorCarrito();
+
+  document.getElementById("carritoIcono").addEventListener("click", () => {
+    document.getElementById("carrito").classList.remove("oculto");
+  });
+  document.getElementById("cerrarCarrito").addEventListener("click", () => {
+    document.getElementById("carrito").classList.add("oculto");
+  });
+  document.getElementById("vaciarCarrito").addEventListener("click", function() {
+    localStorage.setItem("carrito", JSON.stringify([]));
+    actualizarContadorCarrito();
+    document.getElementById("listaCarrito").innerHTML = "";
+    document.getElementById("total").textContent = "0";
+    document.getElementById("carrito").classList.add("oculto");
+  });
 });

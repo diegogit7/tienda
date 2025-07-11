@@ -24,10 +24,17 @@
   </header>
   <main>
     <div id="detalleProducto" style="margin-top:30px;"></div>
+    <div id="carrito" class="oculto" style="position:fixed; top:80px; right:30px; background:#fff; border:1px solid #ccc; padding:20px; z-index:1000; width:300px; box-shadow:0 2px 16px rgba(0,0,0,0.15); border-radius:8px;">
+      <h3>Carrito de Compras</h3>
+      <ul id="listaCarrito"></ul>
+      <p>Total: $<span id="total">0</span></p>
+      <button id="vaciarCarrito">Vaciar carrito</button>
+      <button id="cerrarCarrito">Cerrar</button>
+    </div>
   </main>
   <footer>
     <p>© 2025 Fénix - Tienda de Ropa. Todos los derechos reservados.</p>
   </footer>
-  <script src="detalles.js"></script>
+  <script src="detalle.js"></script>
 </body>
 </html>
