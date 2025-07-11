@@ -28,7 +28,7 @@ function renderProductos() {
       <h3>${p.nombre}</h3>
       <p>$${p.precio}</p>
     `;
-    card.querySelector("img").addEventListener("click", () => agregarAlCarrito(p.id));
+     card.addEventListener("click", () => agregarAlCarrito(p.id));
     productosContainer.appendChild(card);
   });
 }
@@ -55,7 +55,7 @@ function eliminarDelCarrito(id) {
   mostrarMensaje("Producto eliminado del carrito");
 }
 
-// Vacía el carrito
+
 function vaciarCarrito() {
   carrito = [];
   guardarCarrito();
@@ -63,7 +63,6 @@ function vaciarCarrito() {
   mostrarMensaje("Carrito vaciado");
 }
 
-// Actualiza el carrito en la UI
 function actualizarCarrito() {
   listaCarrito.innerHTML = "";
   let totalPrecio = 0;
@@ -94,7 +93,6 @@ function mostrarMensaje(texto) {
   setTimeout(() => mensaje.textContent = "", 1500);
 }
 
-// Mostrar y ocultar el carrito
 document.getElementById("carritoIcono").addEventListener("click", () => {
   carritoUI.classList.remove("oculto");
 });
