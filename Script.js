@@ -15,9 +15,9 @@ const productosContainer = document.getElementById("productos");
 const listaCarrito = document.getElementById("listaCarrito");
 const total = document.getElementById("total");
 const contador = document.getElementById("contador");
-const carritoUI = document.getElementById("carrito");
 const mensaje = document.getElementById("mensaje");
 
+// Renderiza productos en la tienda principal
 function renderProductos() {
   productosContainer.innerHTML = "";
   productos.forEach(p => {
@@ -57,7 +57,7 @@ function eliminarDelCarrito(id) {
   mostrarMensaje("Producto eliminado del carrito");
 }
 
-
+// Vacía el carrito
 function vaciarCarrito() {
   carrito = [];
   guardarCarrito();
@@ -65,6 +65,7 @@ function vaciarCarrito() {
   mostrarMensaje("Carrito vaciado");
 }
 
+// Renderiza el carrito y actualiza el contador
 function actualizarCarrito() {
   listaCarrito.innerHTML = "";
   let totalPrecio = 0;
@@ -85,16 +86,19 @@ function actualizarCarrito() {
   contador.style.display = cantidad === 0 ? 'none' : 'inline-block';
 }
 
+// Guarda el carrito en localStorage
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+// Muestra mensaje temporal
 function mostrarMensaje(texto) {
   if (!mensaje) return;
   mensaje.textContent = texto;
   setTimeout(() => mensaje.textContent = "", 1500);
 }
 
+// Eventos
 document.getElementById("carritoIcono").addEventListener("click", () => {
   window.location.href = "carrito.html";
 });

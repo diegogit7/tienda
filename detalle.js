@@ -22,12 +22,14 @@ function mostrarDetalle() {
     detalle.innerHTML = "";
     return;
   }
-  detalle.innerHTML = `
-    <div class="card" style="margin: 0 auto;">
-      <img src="${producto.imagen}" alt="${producto.nombre}" />
-      <h3>${producto.nombre}</h3>
-      <p>$${producto.precio}</p>
-      <div style="display: flex; align-items: center; gap: 16px; margin: 18px 0 8px 0;">
+
+detalle.innerHTML = `
+  <div class="card" style="margin: 0 auto;">
+    <img src="${producto.imagen}" alt="${producto.nombre}" />
+    <h3>${producto.nombre}</h3>
+    <p>$${producto.precio}</p>
+    <div id="accionesDetalle" style="display: flex; flex-direction: column; gap: 10px; margin: 18px 0 8px 0;">
+      <div style="display: flex; align-items: center; gap: 16px;">
         <div>
           <label for="talla" style="font-weight:bold;">Talla:</label>
           <select id="talla" style="margin-left:8px; padding:4px;">
@@ -40,8 +42,13 @@ function mostrarDetalle() {
         </div>
         <button id="agregarDetalle" style="padding:6px 16px;">Agregar al carrito</button>
       </div>
+      <button id="comprarAhora" style="width:100%; padding:8px 0; background:#28a745; color:#fff; font-size:1em; border:none; border-radius:6px;">
+        Comprar ahora
+      </button>
     </div>
-  `;
+  </div>
+`;
+// ...existing code...
 
   document.getElementById("agregarDetalle").onclick = function() {
     const talla = document.getElementById("talla").value;
@@ -55,9 +62,17 @@ function mostrarDetalle() {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarContadorCarrito();
   };
+
+  document.getElementById("comprarAhora").onclick = function() {
+    const talla = document.getElementById("talla").value;
+    localStorage.setItem("compraDirecta", JSON.stringify({
+      ...producto,
+      cantidad: 1,
+      talla
+    }));
+    window.location.href = "pago.html";
+  };
 }
-
-
 
 function actualizarContadorCarrito() {
   const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -74,53 +89,14 @@ function actualizarContadorCarrito() {
   }
 }
 
-function renderCarrito() {
-  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  const lista = document.getElementById("listaCarrito");
-  const total = document.getElementById("total");
-  lista.innerHTML = "";
-  let suma = 0;
-  carrito.forEach(item => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${item.nombre} (Talla ${item.talla}) x${item.cantidad} - $${item.precio * item.cantidad}
-      <button class="eliminar-item" data-id="${item.id}" data-talla="${item.talla}" style="margin-left:8px;">Eliminar</button>
-    `;
-    lista.appendChild(li);
-    suma += item.precio * item.cantidad;
-  });
-  total.textContent = suma;
-
-  // Evento para eliminar productos
-  document.querySelectorAll(".eliminar-item").forEach(btn => {
-    btn.onclick = function() {
-      const id = Number(btn.getAttribute("data-id"));
-      const talla = btn.getAttribute("data-talla");
-      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-      carrito = carrito.filter(i => !(i.id === id && i.talla === talla));
-      localStorage.setItem("carrito", JSON.stringify(carrito));
-      actualizarContadorCarrito();
-      renderCarrito();
-    };
-  });
-}
-
-
 document.addEventListener("DOMContentLoaded", () => {
   mostrarDetalle();
   actualizarContadorCarrito();
 
-  document.getElementById("carritoIcono").addEventListener("click", () => {
-    window.location.href = "carrito.html"; // Redirige a la página de carrito
-  });
-  document.getElementById("cerrarCarrito").addEventListener("click", () => {
-    document.getElementById("carrito").classList.add("oculto");
-  });
-  document.getElementById("vaciarCarrito").addEventListener("click", function() {
-    localStorage.setItem("carrito", JSON.stringify([]));
-    actualizarContadorCarrito();
-    document.getElementById("listaCarrito").innerHTML = "";
-    document.getElementById("total").textContent = "0";
-    document.getElementById("carrito").classList.add("oculto");
-  });
-}); 
+  const carritoIcono = document.getElementById("carritoIcono");
+  if (carritoIcono) {
+    carritoIcono.addEventListener("click", () => {
+      window.location.href = "carrito.html";
+    });
+  }
+});
