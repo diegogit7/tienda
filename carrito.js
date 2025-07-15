@@ -38,7 +38,7 @@ function renderCarrito() {
 
   carritoTotal.innerHTML = `<p style="font-size:1.2em;"><strong>Total: $${total}</strong></p>`;
 
-  // Actualiza contador
+  
   const cantidad = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   if (contador) {
     contador.textContent = cantidad;
@@ -48,7 +48,7 @@ function renderCarrito() {
     if (numeroCarrito) numeroCarrito.textContent = cantidad;
   }
 
-  // Eliminar producto
+  
   document.querySelectorAll(".eliminar").forEach(btn => {
     btn.onclick = function() {
       const id = Number(btn.getAttribute("data-id"));
@@ -60,5 +60,7 @@ function renderCarrito() {
     };
   });
 }
-
+document.getElementById("comprarCarrito").onclick = function() {
+  window.location.href = "pago.html";
+};
 document.addEventListener("DOMContentLoaded", renderCarrito);
