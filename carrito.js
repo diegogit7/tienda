@@ -36,7 +36,6 @@ function renderCarrito() {
         <p style="margin:0 0 8px 0;">Talla: <strong>${item.talla || '-'}</strong></p>
         <p style="margin:0 0 8px 0;">Cantidad: <strong>${item.cantidad}</strong></p>
         <p style="margin:0 0 8px 0;">Precio unitario: $${item.precio}</p>
-        <p style="margin:0 0 8px 0;">Subtotal: $${item.precio * item.cantidad}</p>
         <button class="eliminar" data-id="${item.id}" data-talla="${item.talla}">Eliminar</button>
       </div>
     `;
