@@ -23,33 +23,31 @@ function mostrarDetalle() {
     return;
   }
 
-detalle.innerHTML = `
-  <div class="card" style="margin: 0 auto;">
-    <img src="${producto.imagen}" alt="${producto.nombre}" />
-    <h3>${producto.nombre}</h3>
-    <p>$${producto.precio}</p>
-    <div id="accionesDetalle" style="display: flex; flex-direction: column; gap: 10px; margin: 18px 0 8px 0;">
-      <div style="display: flex; align-items: center; gap: 16px;">
-                <div class="selector-talla">
-          <label for="talla">Talla:</label>
-          <select id="talla">
-            <option value="35">35</option>
-            <option value="36">36</option>
-            <option value="37">37</option>
-            <option value="38">38</option>
-            <option value="39">39</option>
-          </select>
+  detalle.innerHTML = `
+    <div class="card" style="margin: 0 auto;">
+      <img src="${producto.imagen}" alt="${producto.nombre}" />
+      <h3>${producto.nombre}</h3>
+      <p>$${producto.precio}</p>
+      <div id="accionesDetalle" style="display: flex; flex-direction: column; gap: 10px; margin: 18px 0 8px 0;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="selector-talla">
+            <label for="talla">Talla:</label>
+            <select id="talla">
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+            </select>
+          </div>
+          <button id="agregarDetalle" class="btn eliminar">Agregar al carrito</button>
         </div>
-        <button id="agregarDetalle" class="btn eliminar">Agregar al carrito</button>
+        <button id="seguircomprando">Seguir comprando</button>
       </div>
-      <button id="comprarAhora" style="width:100%; padding:8px 0; background:#28a745; color:#fff; font-size:1em; border:none; border-radius:6px;">
-        Comprar ahora
-      </button>
     </div>
-  </div>
-`;
-// ...existing code...
+  `;
 
+  // Evento para agregar al carrito
   document.getElementById("agregarDetalle").onclick = function() {
     const talla = document.getElementById("talla").value;
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -63,14 +61,9 @@ detalle.innerHTML = `
     actualizarContadorCarrito();
   };
 
-  document.getElementById("comprarAhora").onclick = function() {
-    const talla = document.getElementById("talla").value;
-    localStorage.setItem("compraDirecta", JSON.stringify({
-      ...producto,
-      cantidad: 1,
-      talla
-    }));
-    window.location.href = "pago.html";
+  // Evento para seguir comprando (puedes cambiar la acción si quieres)
+  document.getElementById("seguircomprando").onclick = function() {
+    window.location.href = "index.html"; // O la página que prefieras
   };
 }
 

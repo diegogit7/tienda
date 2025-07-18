@@ -240,3 +240,21 @@ footer {
   border: 1.5px solid #28a745;
   outline: none;
 }
+
+#seguircomprando {
+  padding: 8px 0 !important;
+  font-size: 0.92em !important;
+  min-height: 32px !important;
+  width: 57% !important;
+  border-radius: 6px !important;
+  background: #28a745 !important;
+  color: #fff !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  transition: background 0.2s, box-shadow 0.2s !important;
+  appearance: none !important;
+  margin-top: -5px !important;
+  margin-left: auto !important;
+  display: block !important;
+}
