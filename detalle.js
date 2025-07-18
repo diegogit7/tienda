@@ -50,11 +50,10 @@ function mostrarDetalle() {
               <button type="button" id="sumarCantidad" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">+</button>
             </div>
           </div>
-          <div style="display: flex; width: 100%; gap: 10px; margin-top: 10px;">
-            <button id="agregarDetalle" style="flex:1; background:#28a745; color:#fff; border:none; border-radius:6px; font-size:1em; padding:10px 0; cursor:pointer;">Agregar al carrito</button>
-            <button id="seguircomprando" style="flex:1; background:#28a745; color:#fff; border:none; border-radius:6px; font-size:1em; padding:10px 0; cursor:pointer;">Seguir comprando</button>
-          </div>
-        </div>
+                                     <div style="display: flex; width: 100%; gap: 10px; margin-top: 10px;">
+                    <button id="agregarDetalle" class="btn eliminar boton-carrito" style="flex:1;">Agregar al carrito</button>
+                    <button id="irATienda" class="btn eliminar boton-carrito" style="flex:1;">Ir a tienda</button>
+                  </div>
       </div>
     </div>
   `;
@@ -98,7 +97,7 @@ function mostrarDetalle() {
   };
 
   // Seguir comprando
-  document.getElementById("seguircomprando").onclick = function() {
+  document.getElementById("irATienda").onclick = function() {
     window.location.href = "index.html";
   };
 }

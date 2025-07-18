@@ -172,101 +172,66 @@ footer {
   .card h3 {
     font-size: 1.1em;
   }
-      .card p {
-      font-size: 1em;
-    }
-  }  
-  
-  
-  .btn.eliminar,
-  button.eliminar {
-    padding: 7px 16px;
-    font-size: 0.98em;
-    min-width: 60px;
-    min-height: 32px;
-    background: #cccccc;
-    color: #222;
-    border-radius: 6px;
-    border: none;
-    margin: 4px 0;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: background 0.2s, box-shadow 0.2s;
-    appearance: none;
-    display: inline-block;
+  .card p {
+    font-size: 1em;
   }
-  
-  .btn.eliminar:focus,
-  .btn.eliminar:active,
-  button.eliminar:focus,
-  button.eliminar:active {
-    outline: none;
-    background: #aaaaaa;
-    box-shadow: none;
-  }
+}
 
-
-
-#talla {
-  padding: 6px 14px;
-  font-size: 1em;
-  border-radius: 6px;
-  border: 1.5px solid #bbb;
-  background: #f7f7f7;
+/* Botones grises estilo eliminar y para carrito */
+.btn.eliminar,
+button.eliminar,
+.boton-carrito {
+  background: #cccccc;
   color: #222;
-  min-width: 50px;
-  min-height: 32px;
-  margin-left: 0;
-  margin-top: 5px;
-  appearance: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  transition: border 0.2s;
+  border-radius: 6px;
+  border: none;
+  font-size: 1.08em;
+  height: 38px;
+  min-width: 90px;
+  max-width: 220px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-#talla:focus {
-  border: 1.5px solid #28a745;
+.btn.eliminar:focus,
+.btn.eliminar:active,
+button.eliminar:focus,
+button.eliminar:active,
+.boton-carrito:focus,
+.boton-carrito:active {
   outline: none;
+  background: #aaaaaa;
+  box-shadow: none;
 }
 
-#agregarDetalle,
-#seguircomprando {
-  background: #cccccc !important;      /* Gris igual que eliminar */
-  color: #222 !important;
-  border: none !important;
-  border-radius: 6px !important;
-  font-size: 1.08em !important;
-  min-height: 38px !important;
-  height: 38px !important;
-  max-height: 38px !important;
-  width: 100% !important;
-  cursor: pointer !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
-  transition: background 0.2s, box-shadow 0.2s !important;
-  appearance: none !important;
+/* Fila de botones en carrito */
+.botones-carrito-fila {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.botones-carrito-fila .btn.eliminar,
+.botones-carrito-fila .boton-carrito {
   margin: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 16px !important;           /* Ajusta el texto dentro */
-  text-align: center !important;
-  white-space: nowrap !important;       /* Evita que el texto se salga */
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
 }
 
-#agregarDetalle:active,
-#seguircomprando:active,
-#agregarDetalle:focus,
-#seguircomprando:focus {
-  background: #aaaaaa !important;
-  outline: none !important;
-}
-
+/* Selectores de talla y cantidad */
 .selector-talla,
 .selector-cantidad {
   display: flex;
   align-items: center;
-  gap: 0; /* Sin espacio entre los controles */
+  gap: 0;
   margin-bottom: -10px;
   width: 100%;
   margin-left: 0;
@@ -303,6 +268,12 @@ footer {
   transition: border 0.2s;
   padding: 0;
   vertical-align: middle;
+}
+
+#talla:focus,
+#cantidad:focus {
+  border: 1.5px solid #28a745;
+  outline: none;
 }
 
 .selector-talla button,
