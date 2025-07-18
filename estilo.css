@@ -118,7 +118,7 @@ header {
 
 #carrito {
   position: fixed;
-  top: 60px;
+  top: 80px;
   right: 30px;
   background: #fff;
   border: 1px solid #ddd;
@@ -172,7 +172,36 @@ footer {
   .card h3 {
     font-size: 1.1em;
   }
-  .card p {
-    font-size: 1em;
+      .card p {
+      font-size: 1em;
+    }
+  }  
+  
+  
+  .btn.eliminar,
+  button.eliminar {
+    padding: 7px 16px;
+    font-size: 0.98em;
+    min-width: 60px;
+    min-height: 32px;
+    background: #cccccc;
+    color: #222;
+    border-radius: 6px;
+    border: none;
+    margin: 4px 0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+    appearance: none;
+    display: inline-block;
   }
-}
+  
+  .btn.eliminar:focus,
+  .btn.eliminar:active,
+  button.eliminar:focus,
+  button.eliminar:active {
+    outline: none;
+    background: #aaaaaa;
+    box-shadow: none;
+  }
+

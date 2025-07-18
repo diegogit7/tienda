@@ -40,7 +40,7 @@ detalle.innerHTML = `
             <option value="39">39</option>
           </select>
         </div>
-        <button id="agregarDetalle" style="padding:6px 16px;">Agregar al carrito</button>
+        <button id="agregarDetalle" class="btn eliminar">Agregar al carrito</button>
       </div>
       <button id="comprarAhora" style="width:100%; padding:8px 0; background:#28a745; color:#fff; font-size:1em; border:none; border-radius:6px;">
         Comprar ahora
