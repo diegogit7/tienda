@@ -30,9 +30,9 @@ detalle.innerHTML = `
     <p>$${producto.precio}</p>
     <div id="accionesDetalle" style="display: flex; flex-direction: column; gap: 10px; margin: 18px 0 8px 0;">
       <div style="display: flex; align-items: center; gap: 16px;">
-        <div>
-          <label for="talla" style="font-weight:bold;">Talla:</label>
-          <select id="talla" style="margin-left:8px; padding:4px;">
+                <div class="selector-talla">
+          <label for="talla">Talla:</label>
+          <select id="talla">
             <option value="35">35</option>
             <option value="36">36</option>
             <option value="37">37</option>

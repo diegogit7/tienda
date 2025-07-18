@@ -205,3 +205,38 @@ footer {
     box-shadow: none;
   }
 
+.selector-talla {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.selector-talla label {
+  font-weight: bold;
+  font-size: 1em;
+  color: #222;
+  margin-top: 5px; 
+}
+
+#talla {
+  padding: 6px 14px;
+  font-size: 1em;
+  border-radius: 6px;
+  border: 1.5px solid #bbb;
+  background: #f7f7f7;
+  color: #222;
+  min-width: 50px;
+  min-height: 32px;
+  margin-left: 0;
+  margin-top: 5px;
+  appearance: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: border 0.2s;
+}
+
+#talla:focus {
+  border: 1.5px solid #28a745;
+  outline: none;
+}
