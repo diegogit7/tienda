@@ -205,20 +205,7 @@ footer {
     box-shadow: none;
   }
 
-.selector-talla {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: bold;
-  margin-bottom: 6px;
-}
 
-.selector-talla label {
-  font-weight: bold;
-  font-size: 1em;
-  color: #222;
-  margin-top: 5px; 
-}
 
 #talla {
   padding: 6px 14px;
@@ -241,20 +228,105 @@ footer {
   outline: none;
 }
 
+#agregarDetalle,
 #seguircomprando {
-  padding: 8px 0 !important;
-  font-size: 0.92em !important;
-  min-height: 32px !important;
-  width: 57% !important;
-  border-radius: 6px !important;
-  background: #28a745 !important;
-  color: #fff !important;
+  background: #cccccc !important;      /* Gris igual que eliminar */
+  color: #222 !important;
   border: none !important;
+  border-radius: 6px !important;
+  font-size: 1.08em !important;
+  min-height: 38px !important;
+  height: 38px !important;
+  max-height: 38px !important;
+  width: 100% !important;
   cursor: pointer !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
   transition: background 0.2s, box-shadow 0.2s !important;
   appearance: none !important;
-  margin-top: -5px !important;
-  margin-left: auto !important;
-  display: block !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 16px !important;           /* Ajusta el texto dentro */
+  text-align: center !important;
+  white-space: nowrap !important;       /* Evita que el texto se salga */
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+#agregarDetalle:active,
+#seguircomprando:active,
+#agregarDetalle:focus,
+#seguircomprando:focus {
+  background: #aaaaaa !important;
+  outline: none !important;
+}
+
+.selector-talla,
+.selector-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 0; /* Sin espacio entre los controles */
+  margin-bottom: -10px;
+  width: 100%;
+  margin-left: 0;
+}
+
+.selector-talla label,
+.selector-cantidad label {
+  min-width: 80px;
+  text-align: left;
+  font-size: 1em;
+  font-weight: bold;
+  color: #222;
+  margin-right: 8px;
+  margin-left: 0;
+  padding: 0;
+}
+
+#talla,
+#cantidad {
+  width: 60px;
+  height: 39px;
+  min-width: 60px;
+  min-height: 39px;
+  font-size: 1.1em;
+  border-radius: 6px;
+  border: 1.5px solid #bbb;
+  background: #f7f7f7;
+  color: #222;
+  text-align: center;
+  box-sizing: border-box;
+  margin: 0;
+  appearance: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: border 0.2s;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.selector-talla button,
+.selector-cantidad button {
+  font-size: 1.5em;
+  width: 39px;
+  height: 39px;
+  min-width: 39px;
+  min-height: 39px;
+  border-radius: 6px;
+  border: 1.5px solid #bbb;
+  background: #f7f7f7;
+  color: #222;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: border 0.2s, background 0.2s;
+  margin: 0;
+}
+
+.selector-talla button:active,
+.selector-cantidad button:active {
+  background: #e0e0e0;
+  border-color: #28a745;
 }

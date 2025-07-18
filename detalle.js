@@ -28,42 +28,78 @@ function mostrarDetalle() {
       <img src="${producto.imagen}" alt="${producto.nombre}" />
       <h3>${producto.nombre}</h3>
       <p>$${producto.precio}</p>
-      <div id="accionesDetalle" style="display: flex; flex-direction: column; gap: 10px; margin: 18px 0 8px 0;">
-        <div style="display: flex; align-items: center; gap: 16px;">
-          <div class="selector-talla">
-            <label for="talla">Talla:</label>
-            <select id="talla">
-              <option value="35">35</option>
-              <option value="36">36</option>
-              <option value="37">37</option>
-              <option value="38">38</option>
-              <option value="39">39</option>
-            </select>
+      <div id="accionesDetalle" style="display: flex; flex-direction: column; gap: 18px; margin: 18px 0 8px 0;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 18px;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+            <div class="selector-talla" style="display: flex; align-items: center; gap: 8px;">
+              <label for="talla" style="font-weight:bold; font-size:1em; color:#222;">Talla:</label>
+              <button type="button" id="restarTalla" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">−</button>
+              <select id="talla" style="font-size:1em; width:60px; text-align:center;">
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+              </select>
+              <button type="button" id="sumarTalla" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">+</button>
+            </div>
+            <div class="selector-cantidad" style="display:flex; align-items:center; gap:8px; margin-top:10px;">
+              <label for="cantidad" style="font-weight:bold; font-size:1em; color:#222;">Cantidad:</label>
+              <button type="button" id="restarCantidad" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">−</button>
+              <input type="number" id="cantidad" value="1" min="1" style="width:40px; text-align:center; font-size:1em; border-radius:4px; border:1.5px solid #bbb; background:#f7f7f7; color:#222;" />
+              <button type="button" id="sumarCantidad" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">+</button>
+            </div>
           </div>
-          <button id="agregarDetalle" class="btn eliminar">Agregar al carrito</button>
+          <div style="display: flex; width: 100%; gap: 10px; margin-top: 10px;">
+            <button id="agregarDetalle" style="flex:1; background:#28a745; color:#fff; border:none; border-radius:6px; font-size:1em; padding:10px 0; cursor:pointer;">Agregar al carrito</button>
+            <button id="seguircomprando" style="flex:1; background:#28a745; color:#fff; border:none; border-radius:6px; font-size:1em; padding:10px 0; cursor:pointer;">Seguir comprando</button>
+          </div>
         </div>
-        <button id="seguircomprando">Seguir comprando</button>
       </div>
     </div>
   `;
 
-  // Evento para agregar al carrito
+  // Talla + y -
+  const selectTalla = document.getElementById("talla");
+  document.getElementById("sumarTalla").onclick = () => {
+    let idx = selectTalla.selectedIndex;
+    if (idx < selectTalla.options.length - 1) selectTalla.selectedIndex = idx + 1;
+  };
+  document.getElementById("restarTalla").onclick = () => {
+    let idx = selectTalla.selectedIndex;
+    if (idx > 0) selectTalla.selectedIndex = idx - 1;
+  };
+
+  // Cantidad + y -
+  const inputCantidad = document.getElementById("cantidad");
+  document.getElementById("sumarCantidad").onclick = () => {
+    inputCantidad.value = Number(inputCantidad.value) + 1;
+  };
+  document.getElementById("restarCantidad").onclick = () => {
+    if (Number(inputCantidad.value) > 1) {
+      inputCantidad.value = Number(inputCantidad.value) - 1;
+    }
+  };
+
+  // Agregar al carrito
   document.getElementById("agregarDetalle").onclick = function() {
-    const talla = document.getElementById("talla").value;
+    const talla = selectTalla.value;
+    const cantidad = Number(inputCantidad.value) || 1;
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let item = carrito.find(i => i.id === producto.id && i.talla === talla);
     if (item) {
-      item.cantidad += 1;
+      item.cantidad += cantidad;
     } else {
-      carrito.push({ ...producto, cantidad: 1, talla });
+      carrito.push({ ...producto, cantidad, talla });
     }
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarContadorCarrito();
+    window.location.href = "carrito.html";
   };
 
-  // Evento para seguir comprando (puedes cambiar la acción si quieres)
+  // Seguir comprando
   document.getElementById("seguircomprando").onclick = function() {
-    window.location.href = "index.html"; // O la página que prefieras
+    window.location.href = "index.html";
   };
 }
 
