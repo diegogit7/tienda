@@ -5,7 +5,7 @@ const cors = require('cors');
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 
 const client = new MercadoPagoConfig({
-  accessToken: "APP_USR-1906770288972469-071503-51ebf8bb7f35f705c806873a7e03b3c1-275926486"
+  accessToken: process.env.MERCADOPAGO_TOKEN
 });
 
 const app = express();
