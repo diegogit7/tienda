@@ -3,17 +3,18 @@ console.log("Iniciando backend Mercado Pago...");
 const express = require('express');
 const cors = require('cors');
 const { MercadoPagoConfig, Preference } = require('mercadopago');
-
 const path = require('path');
-app.use(express.static(path.join(__dirname)));
+
+const app = express(); 
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname))); 
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADOPAGO_TOKEN
 });
 
-const app = express();
-app.use(cors());
-app.use(express.json());
 
 app.post('/crear-preferencia', async (req, res) => {
   try {
