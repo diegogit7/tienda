@@ -11,13 +11,11 @@ console.log("Express inicializado");
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname))); 
-console.log("Middlewares cargados");
-
+console.log("Valor del token:", process.env.MERCADOPAGO_TOKEN);
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADOPAGO_TOKEN
 });
 console.log("Cliente Mercado Pago creado:", !!client);
-
 
 
 app.post('/crear-preferencia', async (req, res) => {
