@@ -6,14 +6,18 @@ const { MercadoPagoConfig, Preference } = require('mercadopago');
 const path = require('path');
 
 const app = express(); 
+console.log("Express inicializado");
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname))); 
+console.log("Middlewares cargados");
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADOPAGO_TOKEN
 });
+console.log("Cliente Mercado Pago creado:", !!client);
+
 
 
 app.post('/crear-preferencia', async (req, res) => {
