@@ -17,7 +17,7 @@ const total = document.getElementById("total");
 const contador = document.getElementById("contador");
 const mensaje = document.getElementById("mensaje");
 
-// Renderiza productos en la tienda principal
+
 function renderProductos() {
   productosContainer.innerHTML = "";
   productos.forEach(p => {
@@ -27,15 +27,18 @@ function renderProductos() {
       <img src="${p.imagen}" alt="${p.nombre}" />
       <h3>${p.nombre}</h3>
       <p>$${p.precio}</p>
+      <button class="btn eliminar boton-carrito ver-detalles-btn">Ver detalles</button>
     `;
-    card.addEventListener("click", () => {
+    
+    card.querySelector(".ver-detalles-btn").addEventListener("click", (e) => {
+      e.stopPropagation(); 
       window.location.href = `detalle.html?id=${p.id}`;
     });
     productosContainer.appendChild(card);
   });
 }
 
-// Agrega producto al carrito
+
 function agregarAlCarrito(id) {
   const producto = productos.find(p => p.id === id);
   const item = carrito.find(i => i.id === id);
@@ -49,7 +52,7 @@ function agregarAlCarrito(id) {
   mostrarMensaje("Producto agregado al carrito");
 }
 
-// Elimina producto del carrito
+
 function eliminarDelCarrito(id) {
   carrito = carrito.filter(item => item.id !== id);
   guardarCarrito();
@@ -57,7 +60,7 @@ function eliminarDelCarrito(id) {
   mostrarMensaje("Producto eliminado del carrito");
 }
 
-// Vacía el carrito
+
 function vaciarCarrito() {
   carrito = [];
   guardarCarrito();
@@ -65,7 +68,7 @@ function vaciarCarrito() {
   mostrarMensaje("Carrito vaciado");
 }
 
-// Renderiza el carrito y actualiza el contador
+
 function actualizarCarrito() {
   listaCarrito.innerHTML = "";
   let totalPrecio = 0;
@@ -86,25 +89,25 @@ function actualizarCarrito() {
   contador.style.display = cantidad === 0 ? 'none' : 'inline-block';
 }
 
-// Guarda el carrito en localStorage
+
 function guardarCarrito() {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-// Muestra mensaje temporal
+
 function mostrarMensaje(texto) {
   if (!mensaje) return;
   mensaje.textContent = texto;
   setTimeout(() => mensaje.textContent = "", 1500);
 }
 
-// Eventos
+
 document.getElementById("carritoIcono").addEventListener("click", () => {
   window.location.href = "carrito.html";
 });
 
 document.getElementById("vaciarCarrito").addEventListener("click", vaciarCarrito);
 
-// Inicializa
+
 renderProductos();
 actualizarCarrito();
