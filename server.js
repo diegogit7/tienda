@@ -2,7 +2,11 @@ console.log("Iniciando backend Mercado Pago...");
 
 const express = require('express');
 const cors = require('cors');
+
+console.log("Antes de importar MercadoPago");
 const { MercadoPagoConfig, Preference } = require('mercadopago');
+console.log("Después de importar MercadoPago");
+
 const path = require('path');
 
 const app = express();
