@@ -5,18 +5,26 @@ const cors = require('cors');
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 const path = require('path');
 
-const app = express(); 
+const app = express();
 console.log("Express inicializado");
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname))); 
-console.log("Valor del token:", process.env.MERCADOPAGO_TOKEN);
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADOPAGO_TOKEN
-});
-console.log("Cliente Mercado Pago creado:", !!client);
+app.use(express.static(path.join(__dirname)));
+console.log("Middlewares cargados");
 
+
+console.log("Valor del token:", process.env.MERCADOPAGO_TOKEN);
+
+let client;
+try {
+  client = new MercadoPagoConfig({
+    accessToken: process.env.MERCADOPAGO_TOKEN
+  });
+  console.log("Cliente Mercado Pago creado:", !!client);
+} catch (err) {
+  console.error("Error creando cliente Mercado Pago:", err);
+}
 
 app.post('/crear-preferencia', async (req, res) => {
   try {
@@ -46,7 +54,6 @@ app.post('/crear-preferencia', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 app.get('/', (req, res) => {
   res.send('Servidor funcionando');
