@@ -41,4 +41,10 @@ app.post('/crear-preferencia', async (req, res) => {
   }
 });
 
-app.listen(3001, '0.0.0.0', () => console.log('Servidor Mercado Pago en puerto 3001'));
+
+app.get('/', (req, res) => {
+  res.send('Servidor funcionando');
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, '0.0.0.0', () => console.log(`Servidor Mercado Pago en puerto ${PORT}`));
