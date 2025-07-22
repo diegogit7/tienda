@@ -96,9 +96,8 @@ function mostrarDetalle() {
     window.location.href = "carrito.html";
   };
 
-  // Seguir comprando
   document.getElementById("irATienda").onclick = function() {
-    window.location.href = "index.html";
+    window.location.href = "Index.html";
   };
 }
 
