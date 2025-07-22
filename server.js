@@ -2,7 +2,7 @@ console.log("Iniciando backend Mercado Pago...");
 
 const express = require('express');
 const cors = require('cors');
-const mercadopago = require('mercadopago');
+const { MercadoPagoConfig, Preference } = require('mercadopago');
 const path = require('path');
 
 const app = express();
@@ -15,8 +15,8 @@ console.log("Middlewares cargados");
 
 console.log("Valor del token:", process.env.MERCADOPAGO_TOKEN);
 
-mercadopago.configure({
-  access_token: process.env.MERCADOPAGO_TOKEN
+const client = new MercadoPagoConfig({
+  accessToken: process.env.MERCADOPAGO_TOKEN
 });
 
 app.post('/crear-preferencia', async (req, res) => {
@@ -29,18 +29,19 @@ app.post('/crear-preferencia', async (req, res) => {
     }));
     console.log("Recibido en backend:", items);
 
-    const preference = {
-      items: items,
-      back_urls: {
-        success: "https://tusitio.com/success",
-        failure: "https://tusitio.com/failure",
-        pending: "https://tusitio.com/pending"
-      },
-      auto_return: "approved"
-    };
-
-    const result = await mercadopago.preferences.create(preference);
-    res.json({ id: result.body.id });
+    const preference = new Preference(client);
+    const result = await preference.create({
+      body: {
+        items: items,
+        back_urls: {
+          success: "https://tusitio.com/success",
+          failure: "https://tusitio.com/failure",
+          pending: "https://tusitio.com/pending"
+        },
+        auto_return: "approved"
+      }
+    });
+    res.json({ id: result.id });
   } catch (error) {
     console.error("Error en /crear-preferencia:", error);
     res.status(500).json({ error: error.message });
