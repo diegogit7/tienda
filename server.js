@@ -2,11 +2,7 @@ console.log("Iniciando backend Mercado Pago...");
 
 const express = require('express');
 const cors = require('cors');
-
-console.log("Antes de importar MercadoPago");
-const { MercadoPagoConfig, Preference } = require('mercadopago');
-console.log("Después de importar MercadoPago");
-
+const mercadopago = require('mercadopago');
 const path = require('path');
 
 const app = express();
@@ -17,18 +13,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 console.log("Middlewares cargados");
 
-
 console.log("Valor del token:", process.env.MERCADOPAGO_TOKEN);
 
-let client;
-try {
-  client = new MercadoPagoConfig({
-    accessToken: process.env.MERCADOPAGO_TOKEN
-  });
-  console.log("Cliente Mercado Pago creado:", !!client);
-} catch (err) {
-  console.error("Error creando cliente Mercado Pago:", err);
-}
+mercadopago.configure({
+  access_token: process.env.MERCADOPAGO_TOKEN
+});
 
 app.post('/crear-preferencia', async (req, res) => {
   try {
@@ -40,23 +29,22 @@ app.post('/crear-preferencia', async (req, res) => {
     }));
     console.log("Recibido en backend:", items);
 
-  const preference = new Preference(client);
-    const result = await preference.create({
-      body: {
-        items: items,
-        back_urls: {
-          success: "https://tusitio.com/success",
-          failure: "https://tusitio.com/failure",
-          pending: "https://tusitio.com/pending"
-        },
-        auto_return: "approved"
-      }
-    });
-    res.json({ id: result.id });
- } catch (error) {
+    const preference = {
+      items: items,
+      back_urls: {
+        success: "https://tusitio.com/success",
+        failure: "https://tusitio.com/failure",
+        pending: "https://tusitio.com/pending"
+      },
+      auto_return: "approved"
+    };
+
+    const result = await mercadopago.preferences.create(preference);
+    res.json({ id: result.body.id });
+  } catch (error) {
     console.error("Error en /crear-preferencia:", error);
     res.status(500).json({ error: error.message });
- }
+  }
 });
 
 app.get('/', (req, res) => {
