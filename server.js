@@ -49,7 +49,7 @@ app.post('/crear-preferencia', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Servidor funcionando');
+  res.sendFile(path.join(__dirname, 'Index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
