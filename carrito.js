@@ -81,17 +81,17 @@ document.addEventListener("DOMContentLoaded", () => {
         unit_price: item.precio
       }));
 
-          const res = await fetch('http://192.168.0.16:3001/crear-preferencia', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items })
-      });
-      const data = await res.json();
-      if (data.id) {
-        window.location.href = `https://www.mercadopago.cl/checkout/v1/redirect?pref_id=${data.id}`;
-      } else {
-        alert("Error al iniciar pago");
-      }
+                    const res = await fetch('/crear-preferencia', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items })
+          });
+          const data = await res.json();
+          if (data.init_point) {
+            window.location.href = data.init_point;
+          } else {
+            alert("Error al iniciar pago");
+          }
     };
   }
 

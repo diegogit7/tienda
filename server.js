@@ -41,7 +41,7 @@ app.post('/crear-preferencia', async (req, res) => {
         auto_return: "approved"
       }
     });
-    res.json({ id: result.id });
+    res.json({ id: result.id, init_point: result.init_point });
   } catch (error) {
     console.error("Error en /crear-preferencia:", error);
     res.status(500).json({ error: error.message });

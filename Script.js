@@ -111,3 +111,31 @@ document.getElementById("vaciarCarrito").addEventListener("click", vaciarCarrito
 
 renderProductos();
 actualizarCarrito();
+
+document.getElementById("comprarCarrito").addEventListener("click", async () => {
+  if (carrito.length === 0) {
+    mostrarMensaje("El carrito está vacío");
+    return;
+  }
+  try {
+    const response = await fetch("/crear-preferencia", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        items: carrito.map(item => ({
+          title: item.nombre,
+          quantity: item.cantidad,
+          unit_price: item.precio
+        }))
+      })
+    });
+    const data = await response.json();
+    if (data.init_point) {
+      window.location.href = data.init_point;
+    } else {
+      mostrarMensaje("Error al crear preferencia de pago");
+    }
+  } catch (error) {
+    mostrarMensaje("Error al conectar con Mercado Pago");
+  }
+});
