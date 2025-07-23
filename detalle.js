@@ -1,5 +1,5 @@
 const productos = [
-  { id: 1, nombre: "Zapatilla Tachas", precio: 64900, imagen: "zapatillas/Tachas.jpg" },
+  { id: 1, nombre: "Zapatilla Tachas", precio: 65900, imagen: "zapatillas/Tachas.jpg" },
   { id: 2, nombre: "Zapatilla Zebra", precio: 64900, imagen: "zapatillas/Zebra.jpg" },
   { id: 3, nombre: "Zapatilla negra tachas", precio: 64900, imagen: "zapatillas/Negratachas.jpg" },
   { id: 4, nombre: "Zapatilla multicolor", precio: 64900, imagen: "zapatillas/Multicolor.jpg" },
@@ -26,8 +26,8 @@ function mostrarDetalle() {
   detalle.innerHTML = `
     <div class="card" style="margin: 0 auto;">
       <img src="${producto.imagen}" alt="${producto.nombre}" />
-      <h3>${producto.nombre}</h3>
-      <p>$${producto.precio}</p>
+      <h3 style="margin-bottom:4px;">${producto.nombre}</h3>
+      <p style="margin:0 0 2px 0; font-weight:bold; color:#222;">$${producto.precio}</p>
       <div id="accionesDetalle" style="display: flex; flex-direction: column; gap: 18px; margin: 18px 0 8px 0;">
         <div style="display: flex; flex-direction: column; align-items: center; gap: 18px;">
           <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
