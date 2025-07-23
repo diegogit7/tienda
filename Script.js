@@ -26,7 +26,7 @@ function renderProductos() {
     card.innerHTML = `
       <img src="${p.imagen}" alt="${p.nombre}" />
       <h3 style="margin-bottom:4px;">${p.nombre}</h3>
-      <p style="margin:0 0 6px 0; font-weight:bold; color:#222;">$${p.precio}</p>
+     <p style="margin:0 0 6px 0; font-weight:400; color:#555;">$${p.precio}</p>
       <button class="btn eliminar boton-carrito ver-detalles-btn">Ver detalles</button>
     `;
     card.querySelector(".ver-detalles-btn").addEventListener("click", (e) => {
