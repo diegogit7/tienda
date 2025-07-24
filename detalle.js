@@ -1,20 +1,20 @@
 const productos = [
-  { id: 1, nombre: "Zapatilla Tachas", precio: 64900, imagen: "zapatillas/Tachas.jpg" },
-  { id: 2, nombre: "Zapatilla Zebra", precio: 64900, imagen: "zapatillas/Zebra.jpg" },
-  { id: 3, nombre: "Zapatilla negra tachas", precio: 64900, imagen: "zapatillas/Negratachas.jpg" },
-  { id: 4, nombre: "Zapatilla multicolor", precio: 64900, imagen: "zapatillas/Multicolor.jpg" },
-  { id: 5, nombre: "Zapatilla naranja", precio: 64900, imagen: "zapatillas/Naranja.jpg" },
-  { id: 6, nombre: "Zapatilla animal print fluor", precio: 64900, imagen: "zapatillas/Animalprintfluor.jpg" },
-  { id: 7, nombre: "Zapatilla dorada", precio: 64900, imagen: "zapatillas/Dorada.jpg" },
-  { id: 8, nombre: "Zapatilla animal print zebra", precio: 64900, imagen: "zapatillas/Animalprintzebra.jpg" },
+  { id: 1, nombre: "Zapatilla negra tachas", precio: 64900, imagen: "zapatillas/Negratachas.jpg" , stock: { "36": 1, "37": 2, "39": 1 } }, 
+  { id: 2, nombre: "Zapatilla multicolor", precio: 64900, imagen: "zapatillas/Multicolor.jpg" ,  stock: { "35": 4, "36": 5, "37": 4, "38": 7, "39": 2 } }, 
+  { id: 3, nombre: "Zapatilla naranja", precio: 64900, imagen: "zapatillas/Naranja.jpg", stock: { "35": 2, "36": 2, "37": 3, "38": 3, "39": 2 } }, 
+  { id: 4, nombre: "Zapatilla animal print fluor", precio: 64900, imagen: "zapatillas/Animalprintfluor.jpg",  stock: { "35": 3, "36": 1, "37": 5, "38": 2, "39": 1 } },
+  { id: 5, nombre: "Zapatilla dorada", precio: 64900, imagen: "zapatillas/Dorada.jpg",  stock: { "35": 2, "36": 1, } },
+  { id: 6, nombre: "Zapatilla animal print tacha", precio: 64900, imagen: "zapatillas/Animalprintzebra.jpg" ,  stock: { "35": 5, "36": 7, "37": 8, "38": 9, "39": 2 } }
+    
 ];
+
 
 function getIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return Number(params.get("id"));
 }
 
-function mostrarDetalle() {
+ function mostrarDetalle() {
   const id = getIdFromUrl();
   const producto = productos.find(p => p.id === id);
   const detalle = document.getElementById("detalleProducto");
@@ -22,6 +22,11 @@ function mostrarDetalle() {
     detalle.innerHTML = "";
     return;
   }
+
+  
+  const tallasDisponibles = producto.stock
+    ? Object.keys(producto.stock).filter(talla => producto.stock[talla] > 0)
+    : ["35", "36", "37", "38", "39"];
 
   detalle.innerHTML = `
     <div class="card" style="margin: 0 auto;">
@@ -35,11 +40,7 @@ function mostrarDetalle() {
               <label for="talla" style="font-weight:bold; font-size:1em; color:#222;">Talla:</label>
               <button type="button" id="restarTalla" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">−</button>
               <select id="talla" style="font-size:1em; width:60px; text-align:center;">
-                <option value="35">35</option>
-                <option value="36">36</option>
-                <option value="37">37</option>
-                <option value="38">38</option>
-                <option value="39">39</option>
+                ${tallasDisponibles.map(talla => `<option value="${talla}">${talla}</option>`).join("")}
               </select>
               <button type="button" id="sumarTalla" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">+</button>
             </div>
@@ -50,10 +51,11 @@ function mostrarDetalle() {
               <button type="button" id="sumarCantidad" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">+</button>
             </div>
           </div>
-                                     <div style="display: flex; width: 100%; gap: 10px; margin-top: 10px;">
-                    <button id="agregarDetalle" class="btn eliminar boton-carrito" style="flex:1;">Agregar al carrito</button>
-                    <button id="irATienda" class="btn eliminar boton-carrito" style="flex:1;">Ir a tienda</button>
-                  </div>
+          <div style="display: flex; width: 100%; gap: 10px; margin-top: 10px;">
+            <button id="agregarDetalle" class="btn eliminar boton-carrito" style="flex:1;">Agregar al carrito</button>
+            <button id="irATienda" class="btn eliminar boton-carrito" style="flex:1;">Ir a tienda</button>
+          </div>
+        </div>
       </div>
     </div>
   `;

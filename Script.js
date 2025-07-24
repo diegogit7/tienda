@@ -1,12 +1,11 @@
 const productos = [
-  { id: 1, nombre: "Zapatilla Tachas", precio: 64900, imagen: "zapatillas/Tachas.jpg" },
-  { id: 2, nombre: "Zapatilla Zebra", precio: 64900, imagen: "zapatillas/Zebra.jpg" },
-  { id: 3, nombre: "Zapatilla negra tachas", precio: 64900, imagen: "zapatillas/Negratachas.jpg" },
-  { id: 4, nombre: "Zapatilla multicolor", precio: 64900, imagen: "zapatillas/Multicolor.jpg" },
-  { id: 5, nombre: "Zapatilla naranja", precio: 64900, imagen: "zapatillas/Naranja.jpg" },
-  { id: 6, nombre: "Zapatilla animal print fluor", precio: 64900, imagen: "zapatillas/Animalprintfluor.jpg" },
-  { id: 7, nombre: "Zapatilla dorada", precio: 64900, imagen: "zapatillas/Dorada.jpg" },
-  { id: 8, nombre: "Zapatilla animal print zebra", precio: 64900, imagen: "zapatillas/Animalprintzebra.jpg" },
+  { id: 1, nombre: "Zapatilla negra tachas", precio: 64900, imagen: "zapatillas/Negratachas.jpg" , stock: { "36": 1, "37": 2, "39": 1 } }, 
+  { id: 2, nombre: "Zapatilla multicolor", precio: 64900, imagen: "zapatillas/Multicolor.jpg" ,  stock: { "35": 4, "36": 5, "37": 4, "38": 7, "39": 2 } }, 
+  { id: 3, nombre: "Zapatilla naranja", precio: 64900, imagen: "zapatillas/Naranja.jpg", stock: { "35": 2, "36": 2, "37": 3, "38": 3, "39": 2 } }, 
+  { id: 4, nombre: "Zapatilla animal print fluor", precio: 64900, imagen: "zapatillas/Animalprintfluor.jpg",  stock: { "35": 3, "36": 1, "37": 5, "38": 2, "39": 1 } },
+  { id: 5, nombre: "Zapatilla dorada", precio: 64900, imagen: "zapatillas/Dorada.jpg",  stock: { "35": 2, "36": 1, } },
+  { id: 6, nombre: "Zapatilla animal print tacha", precio: 64900, imagen: "zapatillas/Animalprintzebra.jpg" ,  stock: { "35": 5, "36": 7, "37": 8, "38": 9, "39": 2 } }
+    
 ];
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
