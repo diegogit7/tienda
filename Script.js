@@ -112,7 +112,6 @@ document.getElementById("carritoIcono").addEventListener("click", () => {
   window.location.href = "carrito.html";
 });
 
-document.getElementById("vaciarCarrito").addEventListener("click", vaciarCarrito);
 
 
 renderProductos();
