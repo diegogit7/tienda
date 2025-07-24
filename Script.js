@@ -145,3 +145,8 @@ document.getElementById("comprarCarrito").addEventListener("click", async () => 
     mostrarMensaje("Error al conectar con Mercado Pago");
   }
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.style.display = "none";
+});

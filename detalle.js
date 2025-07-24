@@ -58,7 +58,7 @@ function mostrarDetalle() {
     </div>
   `;
 
-  // Talla + y -
+  
   const selectTalla = document.getElementById("talla");
   document.getElementById("sumarTalla").onclick = () => {
     let idx = selectTalla.selectedIndex;
@@ -69,7 +69,7 @@ function mostrarDetalle() {
     if (idx > 0) selectTalla.selectedIndex = idx - 1;
   };
 
-  // Cantidad + y -
+ 
   const inputCantidad = document.getElementById("cantidad");
   document.getElementById("sumarCantidad").onclick = () => {
     inputCantidad.value = Number(inputCantidad.value) + 1;
@@ -80,7 +80,7 @@ function mostrarDetalle() {
     }
   };
 
-  // Agregar al carrito
+  
   document.getElementById("agregarDetalle").onclick = function() {
     const talla = selectTalla.value;
     const cantidad = Number(inputCantidad.value) || 1;
