@@ -319,3 +319,16 @@ button.eliminar:active,
   background: #e0e0e0;
   border-color: #28a745;
 }
+
+
+.card button:focus,
+.card select:focus,
+.card input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+.card, .card * {
+  -webkit-tap-highlight-color: transparent;
+}
