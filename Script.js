@@ -146,7 +146,7 @@ document.getElementById("comprarCarrito").addEventListener("click", async () => 
   }
 });
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
   if (loader) loader.style.display = "none";
 });
