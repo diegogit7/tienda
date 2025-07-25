@@ -14,7 +14,7 @@ function getIdFromUrl() {
   return Number(params.get("id"));
 }
 
- function mostrarDetalle() {
+function mostrarDetalle() {
   const id = getIdFromUrl();
   const producto = productos.find(p => p.id === id);
   const detalle = document.getElementById("detalleProducto");
@@ -23,7 +23,6 @@ function getIdFromUrl() {
     return;
   }
 
-  
   const tallasDisponibles = producto.stock
     ? Object.keys(producto.stock).filter(talla => producto.stock[talla] > 0)
     : ["35", "36", "37", "38", "39"];
@@ -38,17 +37,17 @@ function getIdFromUrl() {
           <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
             <div class="selector-talla" style="display: flex; align-items: center; gap: 8px;">
               <label for="talla" style="font-weight:bold; font-size:1em; color:#222;">Talla:</label>
-              <button type="button" id="restarTalla" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">−</button>
+              <button type="button" id="restarTalla" style="font-size:1.1em; padding:2px 10px;">−</button>
               <select id="talla" style="font-size:1em; width:60px; text-align:center;">
                 ${tallasDisponibles.map(talla => `<option value="${talla}">${talla}</option>`).join("")}
               </select>
-              <button type="button" id="sumarTalla" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">+</button>
+              <button type="button" id="sumarTalla" style="font-size:1.1em; padding:2px 10px;">+</button>
             </div>
             <div class="selector-cantidad" style="display:flex; align-items:center; gap:8px; margin-top:10px;">
               <label for="cantidad" style="font-weight:bold; font-size:1em; color:#222;">Cantidad:</label>
-              <button type="button" id="restarCantidad" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">−</button>
-              <input type="number" id="cantidad" value="1" min="1" style="width:40px; text-align:center; font-size:1em; border-radius:4px; border:1.5px solid #bbb; background:#f7f7f7; color:#222;" />
-              <button type="button" id="sumarCantidad" style="font-size:1.1em; padding:2px 10px; border-radius:4px; border:1px solid #bbb; background:#f7f7f7; cursor:pointer;">+</button>
+              <button type="button" id="restarCantidad" style="font-size:1.1em; padding:2px 10px;">−</button>
+              <input type="number" id="cantidad" value="1" min="1" style="width:40px; text-align:center; font-size:1em;" />
+              <button type="button" id="sumarCantidad" style="font-size:1.1em; padding:2px 10px;">+</button>
             </div>
           </div>
           <div style="display: flex; width: 100%; gap: 10px; margin-top: 10px;">
@@ -60,21 +59,39 @@ function getIdFromUrl() {
     </div>
   `;
 
-  
+  // Referencias a los controles
   const selectTalla = document.getElementById("talla");
+  const inputCantidad = document.getElementById("cantidad");
+
+  // Botones de tallas
   document.getElementById("sumarTalla").onclick = () => {
     let idx = selectTalla.selectedIndex;
     if (idx < selectTalla.options.length - 1) selectTalla.selectedIndex = idx + 1;
+    actualizarMaxCantidad();
   };
   document.getElementById("restarTalla").onclick = () => {
     let idx = selectTalla.selectedIndex;
     if (idx > 0) selectTalla.selectedIndex = idx - 1;
+    actualizarMaxCantidad();
   };
 
- 
-  const inputCantidad = document.getElementById("cantidad");
+  // Limitar cantidad según stock de la talla
+  function actualizarMaxCantidad() {
+    const talla = selectTalla.value;
+    const max = producto.stock[talla] || 1;
+    inputCantidad.max = max;
+    if (Number(inputCantidad.value) > max) {
+      inputCantidad.value = max;
+    }
+  }
+  selectTalla.addEventListener("change", actualizarMaxCantidad);
+  actualizarMaxCantidad();
+
+  // Botones de cantidad
   document.getElementById("sumarCantidad").onclick = () => {
-    inputCantidad.value = Number(inputCantidad.value) + 1;
+    if (Number(inputCantidad.value) < Number(inputCantidad.max)) {
+      inputCantidad.value = Number(inputCantidad.value) + 1;
+    }
   };
   document.getElementById("restarCantidad").onclick = () => {
     if (Number(inputCantidad.value) > 1) {
@@ -82,7 +99,7 @@ function getIdFromUrl() {
     }
   };
 
-  
+  // Agregar al carrito
   document.getElementById("agregarDetalle").onclick = function() {
     const talla = selectTalla.value;
     const cantidad = Number(inputCantidad.value) || 1;
@@ -98,6 +115,7 @@ function getIdFromUrl() {
     window.location.href = "carrito.html";
   };
 
+  
   document.getElementById("irATienda").onclick = function() {
     window.location.href = "Index.html";
   };
@@ -118,14 +136,8 @@ function actualizarContadorCarrito() {
   }
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
   mostrarDetalle();
   actualizarContadorCarrito();
-
-  const carritoIcono = document.getElementById("carritoIcono");
-  if (carritoIcono) {
-    carritoIcono.addEventListener("click", () => {
-      window.location.href = "carrito.html";
-    });
-  }
 });
