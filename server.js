@@ -1,5 +1,10 @@
 console.log("Iniciando backend Mercado Pago...");
 
+require('dotenv').config();
+const { Client } = require('pg'); // <-- ESTA LÍNEA ES OBLIGATORIA
+
+// ...tu código...
+
 const express = require('express');
 const cors = require('cors');
 const { MercadoPagoConfig, Preference } = require('mercadopago');
@@ -55,7 +60,7 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Servidor Mercado Pago en puerto ${PORT}`));
 
-require('dotenv').config();
+
 
 const db = new Client({
   user: process.env.PGUSER,
