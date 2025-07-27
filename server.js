@@ -54,3 +54,24 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Servidor Mercado Pago en puerto ${PORT}`));
+
+require('dotenv').config();
+
+const db = new Client({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+});
+db.connect();
+
+// Ruta para obtener todos los productos
+app.get('/api/productos', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM productos');
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
