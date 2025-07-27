@@ -17,7 +17,7 @@ function renderCarrito() {
       const numeroCarrito = contador.querySelector('.numero-carrito');
       if (numeroCarrito) numeroCarrito.textContent = 0;
     }
-    // --- Asegúrate de reasignar el evento aquí ---
+    // --- Asegúrate de reasignar el evento aquí --
     const irTiendaBtn = document.getElementById("irTiendaCarrito");
     if (irTiendaBtn) {
       irTiendaBtn.onclick = function() {
