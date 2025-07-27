@@ -140,4 +140,12 @@ function actualizarContadorCarrito() {
 document.addEventListener("DOMContentLoaded", () => {
   mostrarDetalle();
   actualizarContadorCarrito();
+
+  // --- Esto es lo que falta para que funcione el icono del carrito ---
+  const carritoIcono = document.getElementById("carritoIcono");
+  if (carritoIcono) {
+    carritoIcono.onclick = function() {
+      window.location.href = "carrito.html";
+    };
+  }
 });
