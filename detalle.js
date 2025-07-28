@@ -1,4 +1,4 @@
-const productos = [
+const productos = JSON.parse(localStorage.getItem("productos")) || [
   { id: 1, nombre: "Zapatilla negra tachas", precio: 64900, imagen: "zapatillas/Negratachas.jpg" , stock: { "36": 1, "37": 2, "39": 1 } }, 
   { id: 2, nombre: "Zapatilla multicolor", precio: 64900, imagen: "zapatillas/Multicolor.jpg" ,  stock: { "35": 4, "36": 5, "37": 4, "38": 7, "39": 2 } }, 
   { id: 3, nombre: "Zapatilla naranja", precio: 64900, imagen: "zapatillas/Naranja.jpg", stock: { "35": 2, "36": 2, "37": 3, "38": 3, "39": 2 } }, 
