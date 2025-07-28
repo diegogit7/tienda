@@ -39,9 +39,9 @@ app.post('/crear-preferencia', async (req, res) => {
       body: {
         items: items,
         back_urls: {
-          success: "https://tusitio.com/success",
-          failure: "https://tusitio.com/failure",
-          pending: "https://tusitio.com/pending"
+          success: "https://tienda-3-n16v.onrender.com/exito.html",
+          failure: "https://tienda-3-n16v.onrender.com/error.html",
+          pending: "https://tienda-3-n16v.onrender.com/pendiente.html"
         },
         auto_return: "approved"
       }
@@ -81,3 +81,23 @@ app.get('/api/productos', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.post('/api/descontar-stock', async (req, res) => {
+  const { id, talla, cantidad } = req.body;
+  try {
+    // Obtén el stock actual
+    const result = await db.query('SELECT stock FROM productos WHERE id = $1', [id]);
+    if (result.rows.length === 0) return res.status(404).json({ error: 'Producto no encontrado' });
+
+    let stock = result.rows[0].stock;
+    if (!stock[talla] || stock[talla] < cantidad) {
+      return res.status(400).json({ error: 'Stock insuficiente' });
+    }
+    stock[talla] -= cantidad;
+
+    await db.query('UPDATE productos SET stock = $1 WHERE id = $2', [stock, id]);
+    res.json({ success: true, stock });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+})
