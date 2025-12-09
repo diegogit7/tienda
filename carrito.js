@@ -21,7 +21,7 @@ function renderCarrito() {
     const irTiendaBtn = document.getElementById("irTiendaCarrito");
     if (irTiendaBtn) {
       irTiendaBtn.onclick = function() {
-        window.location.href = "Index.html";
+        window.location.href = "index.html";
       };
     }
     return;
