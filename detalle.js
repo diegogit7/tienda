@@ -117,7 +117,7 @@ function mostrarDetalle() {
 
   
   document.getElementById("irATienda").onclick = function() {
-    window.location.href = "Index.html";
+    window.location.href = "index.html";
   };
 }
 
