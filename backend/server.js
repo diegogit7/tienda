@@ -33,7 +33,7 @@ db.connect();
 
 // RUTAS
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'Index.html')); // ← BUSCA EN LA RAÍZ
+  res.sendFile(path.join(__dirname, '..', 'index.html')); // ← BUSCA EN LA RAÍZ (minúscula)
 });
 
 // Obtener productos - COMENTADO (no uso DB)
