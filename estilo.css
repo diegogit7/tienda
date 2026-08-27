@@ -21,20 +21,21 @@ header {
   left: 0;
   width: 100%;
   z-index: 100;
-  padding: 0 0 0 10px;
+  padding: 0;
 }
 
 .header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px 0 0;
+  padding-left: 4px;
 }
 
 .logo {
   max-height: 56px;
   vertical-align: middle;
 }
+
 
 #carritoIcono {
   display: flex;
@@ -331,4 +332,76 @@ button.eliminar:active,
 
 .card, .card * {
   -webkit-tap-highlight-color: transparent;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+}
+
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+
+/* Lado izquierdo */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 0;
+}
+
+.menu-hamburguesa {
+  font-size: 30px;
+  line-height: 1;     /* ← NO 0 */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu {
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  z-index: 999;
+}
+
+
+.menu a {
+  display: block;
+  text-decoration: none;
+  color: #222;
+  margin: 10px 0;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Ocultar */
+.oculto {
+  display: none;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 0 20px;    /* solo lados */
 }

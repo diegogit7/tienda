@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fénix - Tienda de Ropa</title>
+  <link rel="stylesheet" href="estilo.css" />
+</head>
+<body>
+  
+<header class="header">
+  <div class="header-content">
+
+    <!-- IZQUIERDA: logo + hamburguesa -->
+    <div class="header-left">
+     <img src="Fenix.png" alt="Logo Fénix" class="logo">
+     <div class="menu-hamburguesa" onclick="toggleMenu()">☰</div>
+    </div>
+
+
+    <!-- DERECHA: carrito -->
+    <div id="carritoIcono">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 32 32">
+        <path d="M10 12V9a6 6 0 1 1 12 0v3" stroke="#222" stroke-width="2" fill="none"/>
+        <rect x="6" y="12" width="20" height="14" rx="2" stroke="#222" stroke-width="2" fill="none"/>
+        <path d="M13 18a3 3 0 0 0 6 0" stroke="#222" stroke-width="2" fill="none"/>
+      </svg>
+      <span id="contador" class="contador" data-cantidad="0">
+        <span class="numero-carrito">0</span>
+      </span>
+    </div>
+
+  </div>
+
+</header>
+
+  <nav id="menu" class="menu oculto">
+    <a href="index.html">Trajes de baño</a>
+    <a href="zapatillas.html" class="activo">Zapatillas</a>
+  </nav>
+
+
+<main>
+  <div id="productos" class="productos"></div>
+  <div id="mensaje" style="color:green; margin-top:10px; margin-left:20px;"></div>
+  <div id="carrito" class="oculto" style="position:fixed; top:80px; right:30px; background:#fff; border:1px solid #ccc; padding:20px; z-index:1000; width:300px; box-shadow:0 2px 16px rgba(0,0,0,0.15); border-radius:8px;">
+    <h3>Carrito de Compras</h3>
+    <ul id="listaCarrito"></ul>
+    <p>Total: $<span id="total">0</span></p>
+    <button id="vaciarCarrito">Vaciar carrito</button>
+    <button id="cerrarCarrito">Cerrar</button>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Fénix - Tienda de Ropa. Todos los derechos reservados.</p>
+</footer>
+<script src="Script.js"></script>
+
+<script>
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("oculto");
+}
+</script>
+
+</body>
+</html>
+

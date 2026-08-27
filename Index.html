@@ -8,9 +8,17 @@
 </head>
 <body>
   
-<header>
+<header class="header">
   <div class="header-content">
-    <img src="Fenix.png" alt="Logo Fénix" class="logo">
+
+    <!-- IZQUIERDA: logo + hamburguesa -->
+    <div class="header-left">
+     <img src="Fenix.png" alt="Logo Fénix" class="logo">
+     <div class="menu-hamburguesa" onclick="toggleMenu()">☰</div>
+    </div>
+
+
+    <!-- DERECHA: carrito -->
     <div id="carritoIcono">
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 32 32">
         <path d="M10 12V9a6 6 0 1 1 12 0v3" stroke="#222" stroke-width="2" fill="none"/>
@@ -21,8 +29,16 @@
         <span class="numero-carrito">0</span>
       </span>
     </div>
+
   </div>
+
 </header>
+
+  <nav id="menu" class="menu oculto">
+    <a href="index.html" class="activo">Trajes de baño</a>
+    <a href="zapatillas.html">Zapatillas</a>
+  </nav>
+
 
 <main>
   <div id="productos" class="productos"></div>
@@ -39,6 +55,14 @@
 <footer>
   <p>© 2025 Fénix - Tienda de Ropa. Todos los derechos reservados.</p>
 </footer>
-<script src="Script.js"></script>
+<script src="script-index.js"></script>
+
+<script>
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("oculto");
+}
+</script>
+
 </body>
 </html>
+
