@@ -1,4 +1,4 @@
-// server.js - VERSIÓN SIN BASE DE DATOS Y CON RUTA CORREGIDA
+// server.js - VERSIÓN CON VALIDACIÓN DE PRECIOS
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -48,15 +48,40 @@ app.get('/api/productos', async (req, res) => {
 });
 */
 
-// Crear preferencia de pago - ESTA SÍ FUNCIONA
+// Crear preferencia de pago - CON VALIDACIÓN DE PRECIOS
 app.post('/crear-preferencia', async (req, res) => {
   try {
-    const items = req.body.items.map(item => ({
-      title: item.title,
-      quantity: item.quantity,
-      unit_price: item.unit_price,
-      currency_id: "CLP"
-    }));
+    // 🔒 LISTA DE PRECIOS REALES (¡ACTUALIZA CON TUS PRODUCTOS!)
+    const PRECIOS_REALES = {
+      'zapatilla negra talla': 64900,
+      'zapatilla multicolor talla': 64900,
+      'zapatilla naranja talla': 64900,
+      'zapatilla animal print fluor talla': 64900,
+      'zapatilla dorada talla': 64900,
+      'zapatilla animal print tacha talla': 64900,
+    };
+
+    // Validar cada item
+    const items = req.body.items.map(item => {
+      // Buscar el precio real por el título (sin la talla)
+      const nombreBase = item.title.split(' Talla')[0].toLowerCase();
+      const precioReal = PRECIOS_REALES[nombreBase];
+      
+      if (!precioReal) {
+        throw new Error(`Producto no encontrado: ${item.title}`);
+      }
+      
+      if (item.unit_price !== precioReal) {
+        throw new Error(`Precio inválido para ${item.title}. Esperado: ${precioReal}, Recibido: ${item.unit_price}`);
+      }
+      
+      return {
+        title: item.title,
+        quantity: item.quantity,
+        unit_price: precioReal, // ✅ Usa el precio REAL
+        currency_id: "CLP"
+      };
+    });
     
     const preference = new Preference(client);
     const result = await preference.create({
@@ -73,7 +98,7 @@ app.post('/crear-preferencia', async (req, res) => {
     res.json({ id: result.id, init_point: result.init_point });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 });
 
