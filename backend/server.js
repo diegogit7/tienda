@@ -1,4 +1,4 @@
-// server.js - VERSIÓN CON VALIDACIÓN DE PRECIOS
+// server.js - VERSIÓN CON VALIDACIÓN DE PRECIOS (CORREGIDA)
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -11,74 +11,55 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '..'))); // ← SERVIR ARCHIVOS DESDE LA RAÍZ
+app.use(express.static(path.join(__dirname, '..')));
 
 // Configurar Mercado Pago
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADOPAGO_TOKEN
 });
 
-// Configurar PostgreSQL - COMENTADO
-/*
-const db = new Client({
-  user: process.env.PGUSER,
-  host: process.env.PGHOST,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
-  ssl: { rejectUnauthorized: false }
-});
-db.connect();
-*/
-
 // RUTAS
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'index.html')); // ← BUSCA EN LA RAÍZ (minúscula)
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
-// Obtener productos - COMENTADO (no uso DB)
-/*
-app.get('/api/productos', async (req, res) => {
-  try {
-    const result = await db.query('SELECT * FROM productos');
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-*/
-
-// Crear preferencia de pago - CON VALIDACIÓN DE PRECIOS
+// Crear preferencia de pago - CON VALIDACIÓN DE PRECIOS (CORREGIDA)
 app.post('/crear-preferencia', async (req, res) => {
   try {
-    // 🔒 LISTA DE PRECIOS REALES (¡ACTUALIZA CON TUS PRODUCTOS!)
+    // 🔒 LISTA DE PRECIOS REALES (claves en minúscula sin talla)
     const PRECIOS_REALES = {
-      'zapatilla negra talla': 64900,
-      'zapatilla multicolor talla': 64900,
-      'zapatilla naranja talla': 64900,
-      'zapatilla animal print fluor talla': 64900,
-      'zapatilla dorada talla': 64900,
-      'zapatilla animal print tacha talla': 64900,
+      'zapatilla negra': 64900,
+      'zapatilla multicolor': 64900,
+      'zapatilla naranja': 64900,
+      'zapatilla animal print fluor': 64900,
+      'zapatilla dorada': 64900,
+      'zapatilla animal print tacha': 64900,
     };
 
     // Validar cada item
     const items = req.body.items.map(item => {
-      // Buscar el precio real por el título (sin la talla)
-      const nombreBase = item.title.split(' Talla')[0].toLowerCase();
-      const precioReal = PRECIOS_REALES[nombreBase];
+      // 🔧 Limpiar el título para buscar en PRECIOS_REALES
+      const tituloLimpio = item.title
+        .split(' Talla')[0]  // Quitar "Talla X"
+        .toLowerCase()       // Convertir a minúsculas
+        .trim();             // Quitar espacios extras
+      
+      const precioReal = PRECIOS_REALES[tituloLimpio];
       
       if (!precioReal) {
+        console.log(`Producto no encontrado: "${tituloLimpio}" (título original: "${item.title}")`);
         throw new Error(`Producto no encontrado: ${item.title}`);
       }
       
       if (item.unit_price !== precioReal) {
-        throw new Error(`Precio inválido para ${item.title}. Esperado: ${precioReal}, Recibido: ${item.unit_price}`);
+        console.log(`Precio inválido: ${item.title} - Esperado: ${precioReal}, Recibido: ${item.unit_price}`);
+        throw new Error(`Precio inválido para ${item.title}`);
       }
       
       return {
         title: item.title,
         quantity: item.quantity,
-        unit_price: precioReal, // ✅ Usa el precio REAL
+        unit_price: precioReal,
         currency_id: "CLP"
       };
     });
@@ -101,30 +82,6 @@ app.post('/crear-preferencia', async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
-// Descontar stock - COMENTADO (no uso DB)
-/*
-app.post('/api/descontar-stock', async (req, res) => {
-  const { id, talla, cantidad } = req.body;
-  try {
-    const result = await db.query('SELECT stock FROM productos WHERE id = $1', [id]);
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Producto no encontrado' });
-    }
-
-    let stock = result.rows[0].stock;
-    if (!stock[talla] || stock[talla] < cantidad) {
-      return res.status(400).json({ error: 'Stock insuficiente' });
-    }
-    stock[talla] -= cantidad;
-
-    await db.query('UPDATE productos SET stock = $1 WHERE id = $2', [stock, id]);
-    res.json({ success: true, stock });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-*/
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;
