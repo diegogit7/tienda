@@ -17,7 +17,6 @@ function renderCarrito() {
       const numeroCarrito = contador.querySelector('.numero-carrito');
       if (numeroCarrito) numeroCarrito.textContent = 0;
     }
-    // - Asegúrate de reasignar el evento aqu -
     const irTiendaBtn = document.getElementById("irTiendaCarrito");
     if (irTiendaBtn) {
       irTiendaBtn.onclick = function() {
@@ -49,10 +48,8 @@ function renderCarrito() {
     listaCarrito.appendChild(div);
   });
 
-  
   carritoTotal.textContent = total;
 
-  
   const cantidad = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   if (contador) {
     contador.textContent = cantidad;
@@ -62,7 +59,6 @@ function renderCarrito() {
     if (numeroCarrito) numeroCarrito.textContent = cantidad;
   }
 
-  
   document.querySelectorAll(".eliminar").forEach(btn => {
     btn.onclick = function() {
       const id = Number(btn.getAttribute("data-id"));
@@ -70,7 +66,7 @@ function renderCarrito() {
       let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
       carrito = carrito.filter(item => !(item.id === id && item.talla === talla));
       localStorage.setItem("carrito", JSON.stringify(carrito));
-      renderCarrito(); 
+      renderCarrito();
     };
   });
 }
@@ -88,17 +84,17 @@ document.addEventListener("DOMContentLoaded", () => {
         unit_price: item.precio
       }));
 
-                    const res = await fetch('/crear-preferencia', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ items })
-          });
-          const data = await res.json();
-          if (data.init_point) {
-            window.location.href = data.init_point;
-          } else {
-            alert("Error al iniciar pago");
-          }
+      const res = await fetch('https://tienda-backend-a7jz.onrender.com/crear-preferencia', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items })
+      });
+      const data = await res.json();
+      if (data.init_point) {
+        window.location.href = data.init_point;
+      } else {
+        alert("Error al iniciar pago");
+      }
     };
   }
 
