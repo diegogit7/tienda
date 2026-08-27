@@ -26,9 +26,9 @@ app.get('/', (req, res) => {
 // Crear preferencia de pago - CON VALIDACIÓN DE PRECIOS (CORREGIDA)
 app.post('/crear-preferencia', async (req, res) => {
   try {
-    // 🔒 LISTA DE PRECIOS REALES (claves en minúscula sin talla)
+    // 🔒 LISTA DE PRECIOS REALES (con nombres exactos de tus productos)
     const PRECIOS_REALES = {
-      'zapatilla negra': 64900,
+      'zapatilla negra tachas': 64900,
       'zapatilla multicolor': 64900,
       'zapatilla naranja': 64900,
       'zapatilla animal print fluor': 64900,
